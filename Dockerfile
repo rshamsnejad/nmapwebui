@@ -14,7 +14,7 @@ RUN rm -rf /var/lib/apt/lists/*
 RUN groupadd -r appgroup &&     useradd -r -g appgroup -d /home/appuser -s /bin/bash -m appuser &&     chown -R appuser:appgroup /home/appuser
 
 # Setup sudo for the user
-RUN echo "appuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/appuser-nopasswd && \
+RUN echo "appuser ALL=(ALL) NOPASSWD: /usr/bin/nmap" > /etc/sudoers.d/appuser-nopasswd && \
     chmod 0440 /etc/sudoers.d/appuser-nopasswd
 
 # Set working directory
