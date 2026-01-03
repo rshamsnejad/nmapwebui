@@ -1,0 +1,27 @@
+services:
+  nmapwebui:
+    build: .
+    container_name: nmapwebui-container
+    ports:
+      - "51234:51234" # Maps host port 51234 to container port 51234
+      - "5679:5679" # debugpy port
+    env_file:
+      - .env # Loads environment variables from your .env file
+    volumes:
+      - "/var/nmapwebui:/app/instance" # Host directory must be owned by nmapwebui user with UID 999
+    environment:
+      # REDIS_HOST and REDIS_PORT removed as Redis is no longer used
+      FLASK_ENV: development # Example: you might want to set other env vars here
+
+    restart: always # To start on boot
+
+    network_mode: host
+    cap_add:
+      - NET_RAW
+
+    # Run Flask only in debug mode
+    #command: python -m flask --debug --app app run -h 0.0.0.0 -p 51234
+    # Run Flask in normal mode under debugpy
+    command: python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m flask --app app run -h 0.0.0.0 -p 51234
+    # Run Flask in debug mode under debugpy
+    #command: python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m flask --debug --app app run -h 0.0.0.0 -p 51234
