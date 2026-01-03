@@ -171,10 +171,10 @@ def run_nmap_scan(scan_run_id, scan_task_id_for_lock):
         
         # OS detection (-O), SYN scan (-sS), and some other scan types require root
         # Check for both space-separated flags and combined flags
-        root_flags = ['-O', '-sS', '-sU', '-sA', '-sW', '-sM']
+        root_flags = ['-O', '-sS', '-sU', '-sA', '-sW', '-sM', '-sn']
         # Ping scan (-sn) does not strictly require root privileges but won't display any MAC address information
         # as a regular user. Comment the line below if privileged access to nmap is a problem in your use case.
-        root_flags.append('-sn')
+        #root_flags.append('-sn')
         
         # Check each flag individually to ensure we catch them regardless of format
         for flag in root_flags:
