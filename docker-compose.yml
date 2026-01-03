@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   nmapwebui:
     build: .
@@ -8,8 +6,10 @@ services:
       - "51234:51234" # Maps host port 51234 to container port 51234
     env_file:
       - .env # Loads environment variables from your .env file
-    #volumes:
-    #  - ./instance:/app/instance # Mounts your host's instance directory
+    volumes:
+      - "/var/nmapwebui:/app/instance" # Host directory must be owned by nmapwebui user with UID 60514
     environment:
       # REDIS_HOST and REDIS_PORT removed as Redis is no longer used
       FLASK_ENV: development # Example: you might want to set other env vars here
+
+    restart: always # To start on boot
