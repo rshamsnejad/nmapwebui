@@ -7,7 +7,7 @@ services:
     env_file:
       - .env # Loads environment variables from your .env file
     volumes:
-      - "/var/nmapwebui:/app/instance" # Host directory must be owned by nmapwebui user with UID 999
+      - "/var/nmapwebui:/app/instance" # Host directory must be owned by nmapwebui user with UID 60514
     environment:
       # REDIS_HOST and REDIS_PORT removed as Redis is no longer used
       FLASK_ENV: development # Example: you might want to set other env vars here

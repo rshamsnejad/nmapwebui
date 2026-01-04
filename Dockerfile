@@ -11,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends nmap libpango-1
 RUN rm -rf /var/lib/apt/lists/*
 
 # Create a non-root user and group
-RUN groupadd -r -g 999 appgroup &&     useradd -r -u 999 -g appgroup -d /home/appuser -s /bin/bash -m appuser &&     chown -R appuser:appgroup /home/appuser
+RUN groupadd -g 60514 appgroup && useradd -f -1 -u 60514 -g appgroup -d /home/appuser -s /bin/bash -m appuser && chown -R appuser:appgroup /home/appuser
 
 # Setup sudo for the user
 RUN echo "appuser ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/appuser-nopasswd && \
