@@ -29,7 +29,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy the entire application source code into /app
 # This includes entrypoint.sh which should be in the project root before this copy
 COPY . .
-COPY ./nmap-mac-prefixes /usr/share/nmap/nmap-mac-prefixes
+
+# Copy some more up-to-date Nmap auxiliary files
+COPY ./nmap-data/nmap-mac-prefixes /usr/share/nmap/nmap-mac-prefixes
+COPY ./nmap-data/dnssd.lua /usr/share/nmap/nselib/dnssd.lua
 
 # Make entrypoint.sh executable, it's now at /app/entrypoint.sh
 RUN chmod +x /app/entrypoint.sh
