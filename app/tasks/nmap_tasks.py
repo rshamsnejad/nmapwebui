@@ -622,13 +622,14 @@ def create_scan_report(scan_run_id, xml_path, normal_path):
             status_elem = host_elem.find('status')
             host_data['status'] = status_elem.get('state') if status_elem is not None else 'unknown'
             
+            host_data['ip_address'] = ''
+            host_data['mac_address'] = ''
             for address_elem in host_elem.findall('address'):
                 if address_elem is not None:
                     if address_elem.get('addrtype') == "ipv4":
                         host_data['ip_address'] = address_elem.get('addr')
                     elif address_elem.get('addrtype') == "mac":
                         host_data['mac_address'] = address_elem.get('addr')
-
             
             hostnames_elem = host_elem.find('hostnames')
             hostname = None
