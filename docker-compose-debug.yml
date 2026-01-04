@@ -19,9 +19,11 @@ services:
     cap_add:
       - NET_RAW
 
+    # Run Flask only in normal mode
+    command: python -m flask --app app run -h 0.0.0.0 -p 51234
     # Run Flask only in debug mode
     #command: python -m flask --debug --app app run -h 0.0.0.0 -p 51234
     # Run Flask in normal mode under debugpy
-    command: python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m flask --app app run -h 0.0.0.0 -p 51234
+    # command: python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m flask --app app run -h 0.0.0.0 -p 51234
     # Run Flask in debug mode under debugpy
     #command: python -m debugpy --listen 0.0.0.0:5679 --wait-for-client -m flask --debug --app app run -h 0.0.0.0 -p 51234
