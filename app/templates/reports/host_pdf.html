@@ -125,6 +125,10 @@
                 <div>{{ host.ip_address }}</div>
             </div>
             <div class="info-item">
+                <div class="info-label">MAC Address:</div>
+                <div>{{ host.mac_address or 'N/A' }}</div>
+            </div>
+            <div class="info-item">
                 <div class="info-label">OS Detection:</div>
                 <div>
                     {% if os_info %}

@@ -29,6 +29,10 @@
                             <div class="col-md-8">{{ host.ip_address }}</div>
                         </div>
                         <div class="row mb-3">
+                            <div class="col-md-4 fw-bold">MAC Address:</div>
+                            <div class="col-md-8">{{ host.mac_address or 'N/A' }}</div>
+                        </div>
+                        <div class="row mb-3">
                             <div class="col-md-4 fw-bold">Hostname:</div>
                             <div class="col-md-8">{{ host.hostname or 'N/A' }}</div>
                         </div>
