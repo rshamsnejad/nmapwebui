@@ -94,6 +94,9 @@ def run_nmap_scan(scan_run_id, scan_task_id_for_lock):
             nmap_args = custom_args
         else:
             nmap_args = '-T4 -F'  # Default to quick scan
+
+        # Add mDNS reverse-resolver
+        nmap_args += " --script=broadcast-dns-service-discovery"
         
         # Add output formats to arguments
         nmap_args += f" -oX {xml_output} -oN {normal_output}"
