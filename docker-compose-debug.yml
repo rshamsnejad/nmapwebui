@@ -15,6 +15,11 @@ services:
 
     restart: always # To start on boot
 
+    # Required options for MAC Address reporting
+    network_mode: host
+    cap_add:
+      - NET_RAW
+
     # Run Flask only in normal mode
     command: python -m flask --app app run -h 0.0.0.0 -p 51234
     # Run Flask only in debug mode
