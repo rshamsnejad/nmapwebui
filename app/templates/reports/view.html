@@ -98,6 +98,7 @@
                             <tr>
                                 <th>IP Address</th>
                                 <th>MAC Address</th>
+                                <th>Vendor</th>
                                 <th>Hostname</th>
                                 <th>Status</th>
                                 <th>Open Ports</th>
@@ -110,6 +111,7 @@
                             <tr>
                                 <td>{{ host.ip_address }}</td>
                                 <td>{{ host.mac_address or 'N/A' }}</td>
+                                <td>{{ host.vendor or 'N/A' }}</td>
                                 <td>{{ host.hostname or 'N/A' }}</td>
                                 <td>
                                     {% if host.status == 'up' %}
