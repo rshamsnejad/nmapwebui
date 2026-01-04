@@ -13,3 +13,8 @@ services:
       FLASK_ENV: development # Example: you might want to set other env vars here
 
     restart: always # To start on boot
+
+    # Required options for MAC Address reporting
+    network_mode: host
+    cap_add:
+      - NET_RAW

@@ -172,6 +172,9 @@ def run_nmap_scan(scan_run_id, scan_task_id_for_lock):
         # OS detection (-O), SYN scan (-sS), and some other scan types require root
         # Check for both space-separated flags and combined flags
         root_flags = ['-O', '-sS', '-sU', '-sA', '-sW', '-sM']
+        # Ping scan (-sn) does not strictly require root privileges but won't display any MAC address information
+        # as a regular user. Comment the line below if privileged access to nmap is a problem in your use case.
+        root_flags.append('-sn')
         
         # Check each flag individually to ensure we catch them regardless of format
         for flag in root_flags:
@@ -618,8 +621,15 @@ def create_scan_report(scan_run_id, xml_path, normal_path):
             host_data = {}
             status_elem = host_elem.find('status')
             host_data['status'] = status_elem.get('state') if status_elem is not None else 'unknown'
-            address_elem = host_elem.find('address')
-            host_data['ip_address'] = address_elem.get('addr') if address_elem is not None else ''
+            
+            host_data['ip_address'] = ''
+            host_data['mac_address'] = ''
+            for address_elem in host_elem.findall('address'):
+                if address_elem is not None:
+                    if address_elem.get('addrtype') == "ipv4":
+                        host_data['ip_address'] = address_elem.get('addr')
+                    elif address_elem.get('addrtype') == "mac":
+                        host_data['mac_address'] = address_elem.get('addr')
             
             hostnames_elem = host_elem.find('hostnames')
             hostname = None
@@ -701,6 +711,7 @@ def create_scan_report(scan_run_id, xml_path, normal_path):
             for host_data in parsed_hosts_data:
                 host_finding = HostFinding(
                     ip_address=host_data['ip_address'],
+                    mac_address=host_data['mac_address'],
                     hostname=host_data['hostname'],
                     status=host_data['status'],
                     os_info=host_data['os_info']
