@@ -265,6 +265,10 @@
                 <div>{{ item.host.mac_address or 'N/A' }}</div>
             </div>
             <div class="info-item">
+                <div class="info-label">Vendor:</div>
+                <div>{{ item.host.vendor or 'N/A' }}</div>
+            </div>
+            <div class="info-item">
                 <div class="info-label">OS Detection:</div>
                 <div>
                     {% if item.os_info %}

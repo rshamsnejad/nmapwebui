@@ -35,6 +35,7 @@ class HostFinding(db.Model):
     report_id = db.Column(db.Integer, db.ForeignKey('scan_reports.id'), nullable=False)
     ip_address = db.Column(db.String(64), nullable=False)
     mac_address = db.Column(db.String(64), nullable=False)
+    vendor = db.Column(db.String(64), nullable=False)
     hostname = db.Column(db.String(255), nullable=True)
     status = db.Column(db.String(20), nullable=False)  # 'up' or 'down'
     os_info = db.Column(db.Text, nullable=True)  # OS detection info (JSON)
@@ -51,6 +52,7 @@ class HostFinding(db.Model):
             'report_id': self.report_id,
             'ip_address': self.ip_address,
             'mac_address': self.mac_address,
+            'vendor': self.vendor,
             'hostname': self.hostname,
             'status': self.status,
             'os_info': self.os_info,
